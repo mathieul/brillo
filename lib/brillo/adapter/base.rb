@@ -26,6 +26,10 @@ module Brillo
       def load_command
         raise NotImplementedError
       end
+
+      def cli_option(name, option)
+        config[name] ? "#{option}#{config[name]}" : nil
+      end
     end
   end
 end

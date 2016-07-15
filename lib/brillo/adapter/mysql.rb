@@ -25,9 +25,14 @@ module Brillo
       end
 
       def load_command
-        host = config[:host] ? "--host #{config[:host]}" : ""
-        password = config[:password] ? "-p#{config[:password]}" : ""
-        "mysql #{host} -u #{config[:username]} #{password} #{config[:database]}"
+        [
+          "mysql",
+          cli_option(:host, "--host "),
+          cli_option(:username, "-u "),
+          cli_option(:password, "-p "),
+          cli_option(:port, "-P "),
+          config[:database]
+        ].compact.join(" ")
       end
     end
   end
